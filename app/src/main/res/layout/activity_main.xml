@@ -4,15 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_color"
     tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="322dp"
+            android:layout_height="263dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/hnag_logo" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="268dp"
+            android:layout_height="174dp"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/logo_txt" />
+
+        <ProgressBar
+            android:id="@+id/loading"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:indeterminateBehavior="repeat" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

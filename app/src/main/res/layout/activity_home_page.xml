@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_page"
+    tools:context=".modules.HomePage">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="342dp"
+            android:layout_height="231dp"
+            android:layout_marginLeft="5dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/homescreen_logo" />
+
+        <ImageView
+            android:id="@+id/play_btn"
+            android:layout_width="199dp"
+            android:layout_height="184dp"
+            android:layout_marginTop="35dp"
+            app:srcCompat="@drawable/play_btn" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/settings_btn"
+            android:layout_width="88dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/settings_button" />
+
+        <ImageView
+            android:id="@+id/mute_btn"
+            android:layout_width="88dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/speacker_btn" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="176dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/letter_underscore_01"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/level_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/fredoka"
+            android:letterSpacing="0.04"
+            android:shadowColor="@color/text_shadow_01"
+            android:shadowDx="0"
+            android:shadowDy="1.25"
+            android:shadowRadius="1.25"
+            android:text="Level 01"
+            android:textColor="@color/white"
+            android:textSize="21sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageView
+            android:id="@+id/history_btn"
+            android:layout_width="88dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/list_btn" />
+
+        <RelativeLayout
+            android:id="@+id/dufuculty_btn"
+            android:layout_width="176dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/btn_bg_02"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/dificulty_btn_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/rubik"
+                android:letterSpacing="0.04"
+                android:shadowColor="@color/text_shadow_01"
+                android:shadowDx="0"
+                android:shadowDy="1.25"
+                android:shadowRadius="1.25"
+                android:text="@string/dificulty_01"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
