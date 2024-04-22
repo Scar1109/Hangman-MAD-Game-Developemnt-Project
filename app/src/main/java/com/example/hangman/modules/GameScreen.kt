@@ -1,5 +1,8 @@
 package com.example.hangman.modules
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -18,14 +21,26 @@ import java.net.URL
 
 class GameScreen : AppCompatActivity() {
 
+    private lateinit var sharedPreferences: SharedPreferences
     private var word: String? = null
     private var category: String? = null
     private var startTime: Long = 0
+    private lateinit var gameBgPlayer : MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_game_screen)
+
+        sharedPreferences = getSharedPreferences("HangmanPrefs", Context.MODE_PRIVATE)
+
+        checkAndSetDefaultDifficulty()
+
+        val difficulty = sharedPreferences.getString("difficulty", "easy") ?: "easy"
+
+        gameBgPlayer = MediaPlayer.create(this, R.raw.game_bg)
+        gameBgPlayer.setVolume(0.7f,0.7f)
+        gameBgPlayer.isLooping = true
 
         val content_layout : ConstraintLayout = findViewById(R.id.content_layout)
         val loading_layout : ConstraintLayout = findViewById(R.id.loading_layout)
@@ -52,10 +67,9 @@ class GameScreen : AppCompatActivity() {
                 content_layout.startAnimation(fadeInAnimation)
                 content_layout.visibility = View.VISIBLE
                 loading_layout.visibility = View.GONE
+                gameBgPlayer.start()
             }, delay)
         }
-
-
     }
 
     private fun fetchRandomWord(difficulty: String, callback: (word: String?, category: String?) -> Unit) {
@@ -91,5 +105,20 @@ class GameScreen : AppCompatActivity() {
                 // Handle exceptions
             }
         }.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        gameBgPlayer.release()
+    }
+
+    private fun saveDifficultyToPrefs(difficulty: String) {
+        sharedPreferences.edit().putString("difficulty", difficulty).apply()
+    }
+
+    private fun checkAndSetDefaultDifficulty() {
+        if (!sharedPreferences.contains("difficulty")) {
+            saveDifficultyToPrefs("easy")
+        }
     }
 }

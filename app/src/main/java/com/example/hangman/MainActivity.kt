@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                     handler.postDelayed(this, totalTime)
                 } else {
                     startActivity(intent)
+                    finish()
                 }
             }
         }, totalTime)
