@@ -87,22 +87,17 @@ class GameScreen : AppCompatActivity() {
                     }
                     reader.close()
 
-                    // Parse the JSON response
                     val jsonResponse = JSONObject(response.toString())
                     word = jsonResponse.getString("word")
                     category = jsonResponse.getString("category")
 
-                    // Now you can use the word and category variables as needed
                     runOnUiThread {
-                        // For example, update UI with the fetched word and category
                         callback(word, category)
                     }
                 } else {
-                    // Handle unsuccessful response
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                // Handle exceptions
             }
         }.start()
     }

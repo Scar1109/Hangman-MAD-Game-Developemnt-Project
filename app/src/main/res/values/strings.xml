@@ -2,4 +2,7 @@
     <string name="app_name">Hangman</string>
     <string name="dificulty_01">Easy</string>
     <string name="sample_txt">sample</string>
+    <string name="setting_txt">SETTINGS</string>
+    <string name="sound_txt">Sound</string>
+    <string name="music_txt">Music</string>
 </resources>
