@@ -5,4 +5,5 @@
     <color name="primary_color">#CCECFB</color>
     <color name="brown_01">#FFB01C</color>
     <color name="text_shadow_01">#400000</color>
+    <color name="text_shadow_keyboard">#80371200</color>
 </resources>
