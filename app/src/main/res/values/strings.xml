@@ -5,4 +5,6 @@
     <string name="setting_txt">SETTINGS</string>
     <string name="sound_txt">Sound</string>
     <string name="music_txt">Music</string>
+    <string name="def_normal">Normal</string>
+    <string name="def_hard">Hard</string>
 </resources>

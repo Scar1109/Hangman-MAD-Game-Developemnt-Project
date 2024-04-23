@@ -10,7 +10,9 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Switch
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import com.example.hangman.MediaPlayerManager
 import com.example.hangman.R
 
 class HomePage : AppCompatActivity() {
@@ -22,6 +24,9 @@ class HomePage : AppCompatActivity() {
     private var isMuted: Boolean = false
     private var isSoundOff : Boolean = false
     private lateinit var muteBtn: ImageView
+    private var level : Int = 1
+    private var dificulty : String = "easy"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,9 +38,10 @@ class HomePage : AppCompatActivity() {
 
         isMuted = sharedPreferences.getBoolean("isMuted", false)
         isSoundOff = sharedPreferences.getBoolean("isSoundOff", false)
+        level = sharedPreferences.getInt("level", 1)
+        dificulty = sharedPreferences.getString("difficulty", "easy").toString()
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.game_background_music)
-        mediaPlayer.isLooping = true
+        mediaPlayer = MediaPlayerManager.getMediaPlayer(this)
         playBtnMusic = MediaPlayer.create(this, R.raw.level_won)
         btnDefaultMusic = MediaPlayer.create(this, R.raw.button)
         mediaPlayer.start()
@@ -52,6 +58,7 @@ class HomePage : AppCompatActivity() {
             }
             val intent = Intent(this, DificultySelectionScreen::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         play_btn.setOnClickListener{
@@ -90,6 +97,15 @@ class HomePage : AppCompatActivity() {
                 btnDefaultMusic.start()
             }
         }
+
+        val level_indicator : TextView = findViewById(R.id.level_indicator)
+        val formattedLevel = String.format("%02d", level)
+
+        level_indicator.text = "Level $formattedLevel"
+
+        val dificulty_btn_txt : TextView = findViewById(R.id.dificulty_btn_txt)
+
+        dificulty_btn_txt.text = dificulty.capitalize()
 
     }
 
@@ -142,7 +158,7 @@ class HomePage : AppCompatActivity() {
         val close_btn : ImageView = dialog.findViewById(R.id.close_btn)
 
         close_btn.setOnClickListener{
-            if(isSoundOff){
+            if(!isSoundOff){
                 btnDefaultMusic.start()
             }
             dialog.hide()
