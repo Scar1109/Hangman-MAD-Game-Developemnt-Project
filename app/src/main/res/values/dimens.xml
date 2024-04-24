@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="original_relative_layout_width">40dp</dimen>
+    <dimen name="original_relative_layout_height">16dp</dimen>
+</resources>

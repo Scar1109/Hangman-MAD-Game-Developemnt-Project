@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.hangman.GameMediaPlayerManager
 import com.example.hangman.R
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -26,6 +29,8 @@ class GameScreen : AppCompatActivity() {
     private var category: String? = null
     private var startTime: Long = 0
     private lateinit var gameBgPlayer : MediaPlayer
+    private var difficulty : String = "easy"
+    private val textViewIds = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +40,9 @@ class GameScreen : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("HangmanPrefs", Context.MODE_PRIVATE)
 
         checkAndSetDefaultDifficulty()
+        difficulty = sharedPreferences.getString("difficulty", "easy").toString()
 
-        val difficulty = sharedPreferences.getString("difficulty", "easy") ?: "easy"
-
-        gameBgPlayer = MediaPlayer.create(this, R.raw.game_bg)
-        gameBgPlayer.setVolume(0.7f,0.7f)
-        gameBgPlayer.isLooping = true
+        gameBgPlayer = GameMediaPlayerManager.getMediaPlayer(this)
 
         val content_layout : ConstraintLayout = findViewById(R.id.content_layout)
         val loading_layout : ConstraintLayout = findViewById(R.id.loading_layout)
@@ -49,7 +51,7 @@ class GameScreen : AppCompatActivity() {
 
         startTime = System.currentTimeMillis()
 
-        fetchRandomWord("easy") { word, category ->
+        fetchRandomWord(difficulty) { word, category ->
 
             val uppercaseWord = word?.toUpperCase()
             val uppercaseCategory = category?.toUpperCase()
@@ -68,8 +70,23 @@ class GameScreen : AppCompatActivity() {
                 content_layout.visibility = View.VISIBLE
                 loading_layout.visibility = View.GONE
                 gameBgPlayer.start()
+
+                val word_section : LinearLayout = findViewById(R.id.word_section)
+
+                word?.forEach { char ->
+                    val itemView = layoutInflater.inflate(R.layout.word_letter_item, null) as LinearLayout
+                    val textView = itemView.findViewById<TextView>(R.id.letterTextView)
+                    textView.text = char.toString().toUpperCase()
+                    val textViewId = View.generateViewId() // Generate unique ID for each TextView
+                    textView.id = textViewId
+                    textViewIds.add(textViewId)
+                    // Add the itemView to the LinearLayout
+                    word_section.addView(itemView)
+                }
             }, delay)
         }
+
+
     }
 
     private fun fetchRandomWord(difficulty: String, callback: (word: String?, category: String?) -> Unit) {
