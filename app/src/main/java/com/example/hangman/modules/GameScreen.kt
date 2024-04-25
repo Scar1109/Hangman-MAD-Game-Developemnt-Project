@@ -11,6 +11,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -35,6 +36,8 @@ class GameScreen : AppCompatActivity() {
     private var category: String? = null
     private var startTime: Long = 0
     private lateinit var gameBgPlayer : MediaPlayer
+    private lateinit var correctBtnPlayer : MediaPlayer
+    private lateinit var incorrectBtnPlayer : MediaPlayer
     private var difficulty : String = "easy"
     private val textViewIds = mutableListOf<Int>()
     private var liveCount : Int = 6
@@ -46,6 +49,7 @@ class GameScreen : AppCompatActivity() {
     private var confirmationDialog: Dialog? = null
     private var settingDialog: Dialog? = null
     private var helpDialog: Dialog? = null
+    private var hintCount : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +64,21 @@ class GameScreen : AppCompatActivity() {
         checkAndSetDefaultDifficulty()
         difficulty = sharedPreferences.getString("difficulty", "easy").toString()
 
+        if(difficulty.equals("easy") == true){
+            hintCount = 1
+        }else if (difficulty.equals("normal") == true){
+            hintCount = 2
+        }else if (difficulty.equals("hard") == true){
+            hintCount = 3
+        }
+
+        val hint_Count : TextView = findViewById(R.id.hint_count)
+        hint_Count.text = "x$hintCount"
+
         gameBgPlayer = GameMediaPlayerManager.getMediaPlayer(this)
         btnDefaultMusic = MediaPlayer.create(this, R.raw.button)
+        correctBtnPlayer = MediaPlayer.create(this, R.raw.alphabet_tap)
+        incorrectBtnPlayer = MediaPlayer.create(this,R.raw.game_lost)
 
         val content_layout : ConstraintLayout = findViewById(R.id.content_layout)
         val loading_layout : ConstraintLayout = findViewById(R.id.loading_layout)
@@ -96,6 +113,7 @@ class GameScreen : AppCompatActivity() {
                 val word_txt :TextView = findViewById(R.id.word)
 
                 word_txt.text = word
+                word_txt.visibility = View.GONE
 
                 val word_section : LinearLayout = findViewById(R.id.word_section)
 
@@ -108,6 +126,7 @@ class GameScreen : AppCompatActivity() {
                     textView.visibility = View.INVISIBLE
                     textViewIds.add(textViewId)
                     word_section.addView(itemView)
+
                 }
             }, delay)
         }
@@ -141,6 +160,30 @@ class GameScreen : AppCompatActivity() {
             }
             showPauseDialog()
         }
+
+        val hint:ImageView = findViewById(R.id.hint_btn)
+
+        hint.setOnClickListener {
+            if(!isSoundOff){
+                btnDefaultMusic.start()
+            }
+            if(hintCount == 0){
+                Toast.makeText(this, "Your hint count exceeded!", Toast.LENGTH_SHORT).show()
+            }else{
+                if (word?.isNotEmpty() == true) {
+
+                    val randomIndex = (word!!.indices).random()
+                    var randomChar = word!![randomIndex]
+                    while (randomChar in guessedLetters) {
+                        randomChar = word!![word!!.indices.random()]
+                    }
+                    handleInput(randomChar.toString().toUpperCase())
+                }
+                hintCount--
+                hint_Count.text = "x$hintCount"
+            }
+        }
+
     }
 
     fun onKeyClicked(view: View) {
@@ -181,15 +224,34 @@ class GameScreen : AppCompatActivity() {
     }
 
     private fun handleInput(value : String) {
+        Log.d("GameScreen", "Value: $value")
         val guessedChar = value.firstOrNull()?.toUpperCase()
         val uppercaseWord = word?.toUpperCase()
         if (guessedChar != null && guessedChar in 'A'..'Z') {
             if (guessedChar !in guessedLetters) {
                 guessedLetters.add(guessedChar)
+                val pressedTxtId = resources.getIdentifier("text_$value", "id", packageName)
+                val pressedText: TextView = findViewById(pressedTxtId)
+
+                val pressedRelativeLayerId = resources.getIdentifier("key_$value" ,"id", packageName)
+                val pressedRelativeLayer : RelativeLayout = findViewById(pressedRelativeLayerId)
+
+                pressedRelativeLayer.setBackgroundResource(R.drawable.keybaord_selected)
+
                 if (uppercaseWord?.contains(guessedChar) != true) {
+                    if(!isSoundOff){
+                        incorrectBtnPlayer.start()
+                    }
                     liveCount--
+                    pressedText.setTextColor(resources.getColor(R.color.incorrect_key_txt))
+                    pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.correct_key_shadow))
                 } else {
+                    if(!isSoundOff){
+                        correctBtnPlayer.start()
+                    }
                     revealLetters(guessedChar)
+                    pressedText.setTextColor(resources.getColor(R.color.correct_key_txt))
+                    pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.incorrect_key_txt))
                 }
             }
         }

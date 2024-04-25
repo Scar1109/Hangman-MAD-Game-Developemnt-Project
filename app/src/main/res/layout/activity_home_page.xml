@@ -115,7 +115,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="20dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/list_btn" />
+            app:srcCompat="@drawable/list_btn"
+            tools:visibility="invisible" />
 
         <RelativeLayout
             android:id="@+id/dufuculty_btn"

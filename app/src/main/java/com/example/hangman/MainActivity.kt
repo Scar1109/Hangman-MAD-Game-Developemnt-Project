@@ -4,8 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.view.View
 import android.widget.ProgressBar
 import androidx.activity.enableEdgeToEdge
 import com.example.hangman.modules.HomePage

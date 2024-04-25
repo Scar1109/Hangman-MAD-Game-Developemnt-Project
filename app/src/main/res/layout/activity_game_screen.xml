@@ -24,7 +24,8 @@
             app:layout_constraintBottom_toTopOf="@+id/word_section"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -111,6 +112,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_A"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -133,6 +135,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_B"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -155,6 +158,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_C"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -177,6 +181,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_D"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -199,6 +204,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_E"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -221,6 +227,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_F"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -243,6 +250,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_G"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -273,6 +281,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_I"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -295,6 +304,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_J"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -317,6 +327,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_K"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -339,6 +350,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_L"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -361,6 +373,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_M"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -383,6 +396,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_N"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -413,6 +427,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_Q"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -435,6 +450,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_R"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -457,6 +473,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_S"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -479,6 +496,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_T"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -501,6 +519,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_U"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -523,6 +542,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_V"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -545,6 +565,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_W"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -575,6 +596,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_H"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -597,6 +619,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_X"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -619,6 +642,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_Z"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -641,6 +665,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_O"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -663,6 +688,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_P"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -685,6 +711,7 @@
                     android:gravity="center">
 
                     <TextView
+                        android:id="@+id/text_Y"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
@@ -725,6 +752,29 @@
             android:textSize="29sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/live_count">
+
+            <ImageView
+                android:id="@+id/hint_btn"
+                android:layout_width="35dp"
+                android:layout_height="41dp"
+                app:srcCompat="@drawable/hint" />
+
+            <TextView
+                android:id="@+id/hint_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="x1" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
