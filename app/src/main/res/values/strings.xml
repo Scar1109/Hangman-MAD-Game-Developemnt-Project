@@ -7,4 +7,21 @@
     <string name="music_txt">Music</string>
     <string name="def_normal">Normal</string>
     <string name="def_hard">Hard</string>
+    <string name="help_txt">HELP</string>
+    <string name="how_to_play_txt">How to Play</string>
+    <string name="wait_txt">WAIT!, THERE\'S MORE!</string>
+    <string name="just_txt">Just more thing</string>
+    <string name="how_to_play_para_01">Welcome to the Hangman game!\nWho has not played this game in\nschool?</string>
+    <string name="how_to_play_para_02">Will you be able to find the secret\nword before the man get hanged?\nIf you can\'t find a word, don\'t\nworry, you can use hints that will\nhelp you discover the word.</string>
+    <string name="wait_para_01">There are three game modes which is you can change according to your skill level.</string>
+    <string name="how_to_play_para">Welcome to the Hangman game!\nWho has not played this game in\nschool?\n\nWill you be able to find the secret\nword before the man get hanged?\nIf you can\'t find a word, don\'t\nworry, you can use hints that will\nhelp you discover the word.</string>
+    <string name="wait_para">There are three game modes which is you can change according to your skill level.\n\nThe difficulty is increasing step by step according to levels. You can up your level by win the game five times.</string>
+    <string name="enjoy_para">Enjoy !!!</string>
+    <string name="pause_txt">PAUSE</string>
+    <string name="yes_txt">Yes</string>
+    <string name="no_txt">No</string>
+    <string name="resume_txt">Resume</string>
+    <string name="Restart_txt">Restart</string>
+    <string name="exit_txt">Exit ?</string>
+
 </resources>

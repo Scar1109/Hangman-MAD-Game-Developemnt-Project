@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="370dp"
     android:layout_height="285dp"
-    android:background="@drawable/settings_bg"
+    android:background="@drawable/settings"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -59,13 +59,13 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="12dp"
-                app:srcCompat="@drawable/icon_sound" />
+                app:srcCompat="@drawable/icon_music" />
 
             <TextView
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik"
-                android:text="@string/sound_txt"
+                android:text="@string/music_txt"
                 android:textColor="@color/white"
                 android:textSize="23sp" />
 
@@ -93,13 +93,13 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="15dp"
-                app:srcCompat="@drawable/icon_music" />
+                app:srcCompat="@drawable/icon_sound" />
 
             <TextView
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik"
-                android:text="@string/music_txt"
+                android:text="@string/sound_txt"
                 android:textColor="@color/white"
                 android:textSize="23sp" />
 
