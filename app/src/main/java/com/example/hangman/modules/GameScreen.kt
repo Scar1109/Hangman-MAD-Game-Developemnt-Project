@@ -8,6 +8,7 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -36,10 +37,15 @@ class GameScreen : AppCompatActivity() {
     private lateinit var gameBgPlayer : MediaPlayer
     private var difficulty : String = "easy"
     private val textViewIds = mutableListOf<Int>()
-    private val liveCount : Int = 6
+    private var liveCount : Int = 6
     private var isMuted: Boolean = false
     private var isSoundOff : Boolean = false
     private lateinit var btnDefaultMusic : MediaPlayer
+    private val guessedLetters = mutableListOf<Char>()
+    private var pauseDialog: Dialog? = null
+    private var confirmationDialog: Dialog? = null
+    private var settingDialog: Dialog? = null
+    private var helpDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +59,7 @@ class GameScreen : AppCompatActivity() {
 
         checkAndSetDefaultDifficulty()
         difficulty = sharedPreferences.getString("difficulty", "easy").toString()
+
         gameBgPlayer = GameMediaPlayerManager.getMediaPlayer(this)
         btnDefaultMusic = MediaPlayer.create(this, R.raw.button)
 
@@ -86,6 +93,9 @@ class GameScreen : AppCompatActivity() {
                     gameBgPlayer.setVolume(0f,0f)
                 }
 
+                val word_txt :TextView = findViewById(R.id.word)
+
+                word_txt.text = word
 
                 val word_section : LinearLayout = findViewById(R.id.word_section)
 
@@ -95,8 +105,8 @@ class GameScreen : AppCompatActivity() {
                     textView.text = char.toString()
                     val textViewId = View.generateViewId() // Generate unique ID for each TextView
                     textView.id = textViewId
+                    textView.visibility = View.INVISIBLE
                     textViewIds.add(textViewId)
-                    // Add the itemView to the LinearLayout
                     word_section.addView(itemView)
                 }
             }, delay)
@@ -171,7 +181,36 @@ class GameScreen : AppCompatActivity() {
     }
 
     private fun handleInput(value : String) {
-        Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
+        val guessedChar = value.firstOrNull()?.toUpperCase()
+        val uppercaseWord = word?.toUpperCase()
+        if (guessedChar != null && guessedChar in 'A'..'Z') {
+            if (guessedChar !in guessedLetters) {
+                guessedLetters.add(guessedChar)
+                if (uppercaseWord?.contains(guessedChar) != true) {
+                    liveCount--
+                } else {
+                    revealLetters(guessedChar)
+                }
+            }
+        }
+        updateUI()
+    }
+
+    private fun revealLetters(guessedChar: Char) {
+        val uppercaseWord = word?.toUpperCase()
+        for (i in uppercaseWord?.indices!!) {
+            if (uppercaseWord!![i] == guessedChar) {
+                val textViewId = textViewIds[i]
+                val textView = findViewById<TextView>(textViewId)
+                textView.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun updateUI() {
+        // Update the remaining lives count
+        val liveCountTextView: TextView = findViewById(R.id.live_count)
+        liveCountTextView.text = String.format("06/0%d", liveCount)
     }
 
     private fun fetchRandomWord(difficulty: String, callback: (word: String?, category: String?) -> Unit) {
@@ -204,7 +243,11 @@ class GameScreen : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        gameBgPlayer.release()
+        // Dismiss any open dialogs to prevent WindowLeaked exception
+        pauseDialog?.dismiss()
+        confirmationDialog?.dismiss()
+        settingDialog?.dismiss()
+        helpDialog?.dismiss()
     }
 
     private fun saveDifficultyToPrefs(difficulty: String) {
@@ -219,6 +262,7 @@ class GameScreen : AppCompatActivity() {
 
     private fun showHelpDialog() {
         val dialog = Dialog(this, R.style.CustomDialogTheme)
+        helpDialog = dialog
         dialog.setContentView(R.layout.help_popup_activity)
 
         val close_btn : ImageView = dialog.findViewById(R.id.close_btn)
@@ -265,6 +309,7 @@ class GameScreen : AppCompatActivity() {
 
     private fun showCustomDialog() {
         val dialog = Dialog(this, R.style.CustomDialogTheme)
+        settingDialog = dialog
         dialog.setContentView(R.layout.settings_popup_activity)
 
         val close_btn : ImageView = dialog.findViewById(R.id.close_btn)
@@ -313,6 +358,7 @@ class GameScreen : AppCompatActivity() {
     }
     private fun showPauseDialog() {
         val dialog = Dialog(this, R.style.CustomDialogTheme)
+        pauseDialog = dialog
         dialog.setContentView(R.layout.pause_popup_activity)
 
         val close_btn : ImageView = dialog.findViewById(R.id.close_btn)
@@ -336,9 +382,8 @@ class GameScreen : AppCompatActivity() {
         val restart_btn : RelativeLayout = dialog.findViewById(R.id.restart_btn)
 
         restart_btn.setOnClickListener{
-            val intent = intent
-            finish()
-            startActivity(intent)
+            dialog.hide()
+            recreate()
         }
 
         val setting_btn : ImageView = dialog.findViewById(R.id.setting_btn)
@@ -364,6 +409,7 @@ class GameScreen : AppCompatActivity() {
 
     private fun showConformation() {
         val dialog = Dialog(this, R.style.CustomDialogTheme)
+        confirmationDialog = dialog
         dialog.setContentView(R.layout.conformation_popup_activity)
 
         val close_btn : ImageView = dialog.findViewById(R.id.close_btn)

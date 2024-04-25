@@ -47,6 +47,8 @@ class HomePage : AppCompatActivity() {
         mediaPlayer.start()
         if(isMuted){
             mediaPlayer.setVolume(0f,0f)
+        }else{
+            mediaPlayer.setVolume(0.7f, 0.7f)
         }
 
         val dufuculty_btn : RelativeLayout = findViewById(R.id.dufuculty_btn)
@@ -65,9 +67,10 @@ class HomePage : AppCompatActivity() {
             if(!isSoundOff){
                 playBtnMusic.start()
             }
-            mediaPlayer.release()
+            mediaPlayer.setVolume(0f,0f)
             val intent = Intent(this, GameScreen::class.java)
             startActivity(intent)
+            finish()
         }
 
         muteBtn = findViewById(R.id.mute_btn)
@@ -146,7 +149,6 @@ class HomePage : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer.release()
         btnDefaultMusic.release()
         playBtnMusic.release()
     }
