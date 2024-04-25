@@ -26,6 +26,7 @@ class HomePage : AppCompatActivity() {
     private lateinit var muteBtn: ImageView
     private var level : Int = 1
     private var dificulty : String = "easy"
+    private var wons : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,7 @@ class HomePage : AppCompatActivity() {
         isSoundOff = sharedPreferences.getBoolean("isSoundOff", false)
         level = sharedPreferences.getInt("level", 1)
         dificulty = sharedPreferences.getString("difficulty", "easy").toString()
+        wons = sharedPreferences.getInt("wons", 1)
 
         mediaPlayer = MediaPlayerManager.getMediaPlayer(this)
         playBtnMusic = MediaPlayer.create(this, R.raw.level_won)

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Hangman"
         tools:targetApi="31">
         <activity
+            android:name=".modules.ResultScreen"
+            android:exported="false" />
+        <activity
             android:name=".modules.DificultySelectionScreen"
             android:exported="false" />
         <activity

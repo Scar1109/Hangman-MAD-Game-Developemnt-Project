@@ -50,6 +50,8 @@ class GameScreen : AppCompatActivity() {
     private var settingDialog: Dialog? = null
     private var helpDialog: Dialog? = null
     private var hintCount : Int = 0
+    private var level : Int = 1
+    private var correctCount : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +62,7 @@ class GameScreen : AppCompatActivity() {
 
         isMuted = sharedPreferences.getBoolean("isMuted", false)
         isSoundOff = sharedPreferences.getBoolean("isSoundOff", false)
+        level = sharedPreferences.getInt("level", 1)
 
         checkAndSetDefaultDifficulty()
         difficulty = sharedPreferences.getString("difficulty", "easy").toString()
@@ -113,7 +116,6 @@ class GameScreen : AppCompatActivity() {
                 val word_txt :TextView = findViewById(R.id.word)
 
                 word_txt.text = word
-                word_txt.visibility = View.GONE
 
                 val word_section : LinearLayout = findViewById(R.id.word_section)
 
@@ -130,6 +132,8 @@ class GameScreen : AppCompatActivity() {
                 }
             }, delay)
         }
+
+        Log.d("GameScreen", "Fetched word "+ word)
 
         for (char in 'A'..'Z') {
             val keyLayoutId = resources.getIdentifier("key_$char", "id", packageName)
@@ -224,7 +228,8 @@ class GameScreen : AppCompatActivity() {
     }
 
     private fun handleInput(value : String) {
-        Log.d("GameScreen", "Value: $value")
+        val intent1 = Intent(this, ResultScreen::class.java)
+
         val guessedChar = value.firstOrNull()?.toUpperCase()
         val uppercaseWord = word?.toUpperCase()
         if (guessedChar != null && guessedChar in 'A'..'Z') {
@@ -245,13 +250,24 @@ class GameScreen : AppCompatActivity() {
                     liveCount--
                     pressedText.setTextColor(resources.getColor(R.color.incorrect_key_txt))
                     pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.correct_key_shadow))
+                    if(liveCount == 0){
+                        intent1.putExtra("status", "lost")
+                        startActivity(intent1)
+                        finish()
+                    }
                 } else {
                     if(!isSoundOff){
                         correctBtnPlayer.start()
                     }
+                    correctCount++
                     revealLetters(guessedChar)
                     pressedText.setTextColor(resources.getColor(R.color.correct_key_txt))
                     pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.incorrect_key_txt))
+                    if (correctCount == word!!.length){
+                        intent1.putExtra("status", "won")
+                        startActivity(intent1)
+                        finish()
+                    }
                 }
             }
         }
