@@ -63,7 +63,7 @@ class DificultySelectionScreen : AppCompatActivity() {
             showCustomDialog()
         }
 
-        val back_btn: ImageView =  findViewById<ImageView>(R.id.back_btn)
+        val back_btn: ImageView =  findViewById(R.id.back_btn)
 
             back_btn.setOnClickListener {
                 val intent = Intent(this, HomePage::class.java)
@@ -109,7 +109,6 @@ class DificultySelectionScreen : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             finish()
         }
-
     }
 
     private fun saveDifficultyPrefs(difficulty: String) {

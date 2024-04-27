@@ -23,5 +23,11 @@
     <string name="resume_txt">Resume</string>
     <string name="Restart_txt">Restart</string>
     <string name="exit_txt">Exit ?</string>
+    <string name="you_lose_txt">YOU LOSE !</string>
+    <string name="you_won_txt">YOU WON !</string>
+    <string name="lvl_txt">Level :</string>
+    <string name="next_btn_txt"><![CDATA[Next >]]></string>
+    <string name="Progress_txt">Progress :</string>
+    <string name="ok_txt">OK</string>
 
 </resources>

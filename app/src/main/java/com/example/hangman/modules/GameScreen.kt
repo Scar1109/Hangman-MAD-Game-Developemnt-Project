@@ -252,6 +252,9 @@ class GameScreen : AppCompatActivity() {
                     pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.correct_key_shadow))
                     if(liveCount == 0){
                         intent1.putExtra("status", "lost")
+                        intent1.putExtra("word", word)
+                        intent1.putExtra("guessedLetters", guessedLetters.toCharArray())
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                         startActivity(intent1)
                         finish()
                     }
@@ -265,6 +268,8 @@ class GameScreen : AppCompatActivity() {
                     pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.incorrect_key_txt))
                     if (correctCount == word!!.length){
                         intent1.putExtra("status", "won")
+                        intent1.putExtra("word", word)
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                         startActivity(intent1)
                         finish()
                     }
@@ -508,6 +513,7 @@ class GameScreen : AppCompatActivity() {
             val intent = Intent(this, HomePage::class.java)
             gameBgPlayer.release()
             btnDefaultMusic.release()
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             startActivity(intent)
             finish()
         }
