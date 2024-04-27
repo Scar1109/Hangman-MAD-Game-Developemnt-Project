@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -54,7 +55,7 @@ class ResultScreen : AppCompatActivity() {
         }
 
         val word_section_won:LinearLayout = findViewById(R.id.word_section_won)
-        word?.forEach { char ->
+        word.forEach { char ->
             val itemView = layoutInflater.inflate(R.layout.word_letter_item, null) as LinearLayout
             val textView = itemView.findViewById<TextView>(R.id.letterTextView)
             textView.text = char.toString()
@@ -85,12 +86,14 @@ class ResultScreen : AppCompatActivity() {
         val won_layout:ConstraintLayout = findViewById(R.id.won_layout)
         val lose_layout:ConstraintLayout = findViewById(R.id.lose_layout)
 
+        Log.d("GameScreen", "Fetched word "+ status)
+
         if(status.equals("won")){
             wons++
             saveWonsToPrefs(wons)
             won_layout.visibility = View.VISIBLE
             lose_layout.visibility = View.GONE
-        }else if(status.equals("lose")){
+        }else if(status.equals("lost")){
             won_layout.visibility = View.GONE
             lose_layout.visibility = View.VISIBLE
         }

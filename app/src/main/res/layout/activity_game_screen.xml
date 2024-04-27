@@ -16,17 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
-        <TextView
-            android:id="@+id/word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/word_section"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -738,7 +727,9 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent">
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/live_count"
@@ -775,6 +766,83 @@
                 android:layout_height="wrap_content"
                 android:text="x1" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/hanged_man_1"
+            android:layout_width="301dp"
+            android:layout_height="506dp"
+            android:layout_marginBottom="60dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/word_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/hang_man01" />
+
+        <ImageView
+            android:id="@+id/hanged_man_2"
+            android:layout_width="301dp"
+            android:layout_height="506dp"
+            android:layout_marginBottom="60dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/word_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/hang_man02" />
+
+        <ImageView
+            android:id="@+id/hanged_man_3"
+            android:layout_width="301dp"
+            android:layout_height="506dp"
+            android:layout_marginBottom="60dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/word_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/hang_man03" />
+
+        <ImageView
+            android:id="@+id/hanged_man_4"
+            android:layout_width="301dp"
+            android:layout_height="506dp"
+            android:layout_marginBottom="60dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/word_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/hang_man04" />
+
+        <ImageView
+            android:id="@+id/hanged_man_5"
+            android:layout_width="301dp"
+            android:layout_height="506dp"
+            android:layout_marginBottom="60dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/word_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/hang_man05" />
+
+        <ImageView
+            android:id="@+id/hanged_man_6"
+            android:layout_width="301dp"
+            android:layout_height="506dp"
+            android:layout_marginBottom="60dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/word_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/hanged_man_with_hang" />
+
+        <ImageView
+            android:id="@+id/default_hang"
+            android:layout_width="115dp"
+            android:layout_height="406dp"
+            android:layout_marginBottom="134dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/word_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/hang" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

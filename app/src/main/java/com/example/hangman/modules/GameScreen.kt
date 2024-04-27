@@ -74,6 +74,7 @@ class GameScreen : AppCompatActivity() {
         }else if (difficulty.equals("hard") == true){
             hintCount = 3
         }
+        chnageMan()
 
         val hint_Count : TextView = findViewById(R.id.hint_count)
         hint_Count.text = "x$hintCount"
@@ -113,11 +114,9 @@ class GameScreen : AppCompatActivity() {
                     gameBgPlayer.setVolume(0f,0f)
                 }
 
-                val word_txt :TextView = findViewById(R.id.word)
-
-                word_txt.text = word
-
                 val word_section : LinearLayout = findViewById(R.id.word_section)
+
+                Log.d("GameScreen", "Fetched word "+ word)
 
                 uppercaseWord?.forEach { char ->
                     val itemView = layoutInflater.inflate(R.layout.word_letter_item, null) as LinearLayout
@@ -132,8 +131,6 @@ class GameScreen : AppCompatActivity() {
                 }
             }, delay)
         }
-
-        Log.d("GameScreen", "Fetched word "+ word)
 
         for (char in 'A'..'Z') {
             val keyLayoutId = resources.getIdentifier("key_$char", "id", packageName)
@@ -187,6 +184,48 @@ class GameScreen : AppCompatActivity() {
                 hint_Count.text = "x$hintCount"
             }
         }
+
+    }
+
+    private fun chnageMan(){
+        val default_hang : ImageView = findViewById(R.id.default_hang)
+        val hanged_man_1 : ImageView = findViewById(R.id.hanged_man_1)
+        val hanged_man_2 : ImageView = findViewById(R.id.hanged_man_2)
+        val hanged_man_3 : ImageView = findViewById(R.id.hanged_man_3)
+        val hanged_man_4 : ImageView = findViewById(R.id.hanged_man_4)
+        val hanged_man_5 : ImageView = findViewById(R.id.hanged_man_5)
+        val hanged_man_6 : ImageView = findViewById(R.id.hanged_man_6)
+
+        when (liveCount) {
+            6 -> {
+                default_hang.visibility = View.VISIBLE
+            }
+            5 -> {
+                default_hang.visibility = View.GONE
+                hanged_man_1.visibility = View.VISIBLE
+            }
+            4 -> {
+                hanged_man_1.visibility = View.GONE
+                hanged_man_2.visibility = View.VISIBLE
+            }
+            3 -> {
+                hanged_man_2.visibility = View.GONE
+                hanged_man_3.visibility = View.VISIBLE
+            }
+            2 -> {
+                hanged_man_3.visibility = View.GONE
+                hanged_man_4.visibility = View.VISIBLE
+            }
+            1 -> {
+                hanged_man_4.visibility = View.GONE
+                hanged_man_5.visibility = View.VISIBLE
+            }
+            0 -> {
+                hanged_man_5.visibility = View.GONE
+                hanged_man_6.visibility = View.VISIBLE
+            }
+        }
+
 
     }
 
@@ -248,6 +287,7 @@ class GameScreen : AppCompatActivity() {
                         incorrectBtnPlayer.start()
                     }
                     liveCount--
+                    chnageMan()
                     pressedText.setTextColor(resources.getColor(R.color.incorrect_key_txt))
                     pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.correct_key_shadow))
                     if(liveCount == 0){
