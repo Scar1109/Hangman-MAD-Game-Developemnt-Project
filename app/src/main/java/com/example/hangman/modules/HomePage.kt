@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Switch
@@ -97,11 +98,7 @@ class HomePage : AppCompatActivity() {
 
         val history_btn : ImageView = findViewById(R.id.history_btn)
 
-        history_btn.setOnClickListener{
-            if(!isSoundOff) {
-                btnDefaultMusic.start()
-            }
-        }
+        history_btn.visibility = View.INVISIBLE
 
         val level_indicator : TextView = findViewById(R.id.level_indicator)
         val formattedLevel = String.format("%02d", level)

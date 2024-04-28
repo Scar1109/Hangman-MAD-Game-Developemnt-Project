@@ -52,6 +52,8 @@ class GameScreen : AppCompatActivity() {
     private var hintCount : Int = 0
     private var level : Int = 1
     private var correctCount : Int = 0
+    private lateinit var winingMusic: MediaPlayer
+    private lateinit var DrawMusic: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +85,8 @@ class GameScreen : AppCompatActivity() {
         btnDefaultMusic = MediaPlayer.create(this, R.raw.button)
         correctBtnPlayer = MediaPlayer.create(this, R.raw.alphabet_tap)
         incorrectBtnPlayer = MediaPlayer.create(this,R.raw.game_lost)
+        winingMusic = MediaPlayer.create(this, R.raw.game_won)
+        DrawMusic = MediaPlayer.create(this, R.raw.lost_one)
 
         val content_layout : ConstraintLayout = findViewById(R.id.content_layout)
         val loading_layout : ConstraintLayout = findViewById(R.id.loading_layout)
@@ -291,6 +295,9 @@ class GameScreen : AppCompatActivity() {
                     pressedText.setTextColor(resources.getColor(R.color.incorrect_key_txt))
                     pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.correct_key_shadow))
                     if(liveCount == 0){
+                        if(!isSoundOff){
+                            DrawMusic.start()
+                        }
                         intent1.putExtra("status", "lost")
                         intent1.putExtra("word", word)
                         intent1.putExtra("guessedLetters", guessedLetters.toCharArray())
@@ -307,6 +314,9 @@ class GameScreen : AppCompatActivity() {
                     pressedText.setTextColor(resources.getColor(R.color.correct_key_txt))
                     pressedText.setShadowLayer(2.16f, 0f, 1.08f, resources.getColor(R.color.incorrect_key_txt))
                     if (correctCount == word!!.length){
+                        if(!isSoundOff){
+                            winingMusic.start()
+                        }
                         intent1.putExtra("status", "won")
                         intent1.putExtra("word", word)
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
